@@ -1,9 +1,9 @@
 class CreateTimeCards < ActiveRecord::Migration[5.1]
   def change
     create_table :time_cards do |t|
-      t.integer :year, limit: 2
-      t.integer :month, limit: 1
-      t.integer :day, limit: 1
+      t.integer :year, limit: 2, null: false
+      t.integer :month, limit: 1, null: false
+      t.integer :day, limit: 1, null: false
       t.time :in
       t.time :out
 

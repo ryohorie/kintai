@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :time_cards
+  has_many :time_cards, dependent: :destroy
   
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
