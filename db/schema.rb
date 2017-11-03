@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102114803) do
+ActiveRecord::Schema.define(version: 20171103062929) do
+
+  create_table "time_cards", force: :cascade do |t|
+    t.integer "year", limit: 2
+    t.integer "month", limit: 1
+    t.integer "day", limit: 1
+    t.time "in"
+    t.time "out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [nil, "year", "month", "day"], name: "index_time_cards_on_user_id_and_year_and_month_and_day", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
