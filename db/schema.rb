@@ -18,9 +18,11 @@ ActiveRecord::Schema.define(version: 20171103062929) do
     t.integer "day", limit: 1, null: false
     t.time "in"
     t.time "out"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [nil, "year", "month", "day"], name: "index_time_cards_on_user_id_and_year_and_month_and_day", unique: true
+    t.index ["user_id", "year", "month", "day"], name: "index_time_cards_on_user_id_and_year_and_month_and_day", unique: true
+    t.index ["user_id"], name: "index_time_cards_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

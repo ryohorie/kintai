@@ -7,6 +7,8 @@ class CreateTimeCards < ActiveRecord::Migration[5.1]
       t.time :in
       t.time :out
 
+      t.references :user, foreign_key: true
+      
       t.timestamps
     end
 
