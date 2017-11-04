@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   year: 
+# user_1_time_card_1:
+#   year: 2017
 #   month: 
 #   day: 
-#   in: 
-#   out: 2017-11-03 15:29:29
+#   in_time: 
+#   out_time: 2017-11-03 15:29:29
 
-# two:
+# user_1_time_card_2:
 #   year: 
 #   month: 
 #   day: 
-#   in: 
-#   out: 2017-11-03 15:29:29
+#   in_time: 
+#   out_time: 2017-11-03 15:29:29
