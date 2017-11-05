@@ -11,7 +11,8 @@ class TimeCard < ApplicationRecord
   class << self
     def today(user)
       date = Date.today
-      self.new(user: user, year: date.year, month: date.month, day: date.day)
+      condition = { user: user, year: date.year, month: date.month, day: date.day }
+      TimeCard.find_by(condition) || self.new(condition)
     end
   end
 
