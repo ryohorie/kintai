@@ -21,4 +21,14 @@ module TimeCardsHelper
       '土曜日'
     end
   end
+
+  def work_status(time_card)
+    if time_card.in_time.nil? && time_card.out_time.nil?
+      '未出社'
+    elsif !time_card.in_time.nil? && time_card.out_time.nil?
+      '勤務中'
+    else !time_card.in_time.nil? && !time_card.out_time.nil?
+      '退社済'
+    end
+  end
 end

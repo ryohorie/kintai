@@ -3,9 +3,20 @@ class TimeCardsController < ApplicationController
   end
 
   def show
-    now = Time.now
-    @year = now.year
-    @month = now.month
-    @day = now.day
+    if request.xhr?
+      ajax_action
+    else
+      @time_card = TimeCard.new(current_user)
+    end
   end
+
+  private
+
+    def ajax_action
+      if params[:in]
+
+      elsif params[:out]
+
+      end
+    end
 end

@@ -8,6 +8,13 @@ class TimeCard < ApplicationRecord
   validates :in_time, presence: true, if: lambda { |m| !m.out_time.nil? }
   validate :out_time_is_later_than_in_time
 
+  class << self
+    def today(user)
+      date = Date.today
+      self.new(user: user, year: date.year, month: date.month, day: date.day)
+    end
+  end
+
   private
 
     def valid_date

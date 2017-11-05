@@ -1,2 +1,7 @@
 <h1>タイムカード</h1>
 <p>今日は <%= date_in_japanese %>です。</p>
+<p><%= work_status(@time_card) %></p>
+<%= form_tag('/timecard', remote: true) do |f| %>
+    <%= submit_tag('出社', name: 'in', id: 'in') %>
+    <%= submit_tag('退社', name: 'out', id: 'out') %>
+<% end %>
