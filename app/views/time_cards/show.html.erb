@@ -5,3 +5,4 @@
   <%= submit_tag('出社', name: 'in', id: 'in', disabled: !!@time_card.in_time) %>
   <%= submit_tag('退社', name: 'out', id: 'out', disabled: !@time_card.in_time || !!@time_card.out_time) %>
 <% end %>
+<%= button_to '勤務表確認', monthly_path, method: :get %>

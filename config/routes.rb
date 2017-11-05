@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get '/timecard', to: 'time_cards#show'
   post '/timecard', to: 'time_cards#show'
+  get '/monthly', to: 'time_cards#index'
 
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
