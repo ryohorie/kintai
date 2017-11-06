@@ -6,11 +6,13 @@ $ ->
   $('#timecard-form').on 'ajax:success', (event) ->
     response = event.detail[0]
     if response.status is 'success'
-      update_view(response.time_card)
+      update_view(response)
     else
       alert 'error'
 
-  update_view = (time_card) ->
+  update_view = (response) ->
+    time_card = response.time_card
+
     if time_card
       if time_card.in_time && !time_card.out_time
         in_enable = false
@@ -21,12 +23,10 @@ $ ->
 
     $('#in').prop('disabled', !in_enable)
     $('#out').prop('disabled', !out_enable)
-    $('#work-status').text(work_status(time_card))
+    $('#work-status').text(working_status(response.working_status))
 
-  work_status = (time_card) ->
-    if !time_card.in_time
-      '未出社'
-    else if time_card.in_time && !time_card.out_time
-      '勤務中'
-    else if time_card.out_time
-      '退社済'
+  working_status = (status) ->
+    switch status
+      when 'not_arrived' then '未出社'
+      when 'working' then '勤務中'
+      when 'left' then '退社済'

@@ -1,2 +1,10 @@
-<h1>TimeCards#index</h1>
-<p>Find me in app/views/time_cards/index.html.erb</p>
+<h1><%= @year %>年<%= @month %>月の勤務表</h1>
+
+<table>
+  <th>
+    <td>日付</td><td>曜</td><td>出社時間</td><td>退社時間</td>
+  </th>
+  <tr>
+    <% render @time_cards %>
+  </tr>
+</table>
