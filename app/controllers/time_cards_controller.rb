@@ -1,4 +1,6 @@
 class TimeCardsController < ApplicationController
+  before_action :logged_in_user
+
   def index
     today = Date.today
     @year = today.year

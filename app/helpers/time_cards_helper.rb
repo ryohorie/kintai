@@ -54,6 +54,7 @@ module TimeCardsHelper
     end
   end
 
+  # 00:00 形式の時間を返す
   def time_string(time)
     time ? time.strftime('%H:%M') : ''
   end
