@@ -8,13 +8,13 @@
     <tr>
       <td><%= date_in_japanese(date, :month_day) %></td>
       <td><%= day_of_the_week_in_japanese(date, :short) %></td>
-      <% if @time_cards[index] %>
-      <td><%= time_string(@time_cards[index].in_time) %></td>
-      <td><%= time_string(@time_cards[index].out_time) %></td>
-      <% else %>
+    <% if @time_cards[index] %>
+      <td><%= time_string(@time_cards[index].in_at) %></td>
+      <td><%= time_string(@time_cards[index].out_at) %></td>
+    <% else %>
       <td></td>
       <td></td>
-      <% end %>
+    <% end %>
     </tr>
   <% end %>
 </table>

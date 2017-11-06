@@ -5,8 +5,8 @@ class TimeCard < ApplicationRecord
   validates :month, presence: true
   validates :day, presence: true
   validate :valid_date
-  validates :in_time, presence: true, if: lambda { |m| !m.out_time.nil? }
-  validate :out_time_is_later_than_in_time
+  validates :in_at, presence: true, if: lambda { |m| !m.out_at.nil? }
+  validate :out_at_is_later_than_in_at
 
   class << self
     # 今日のタイムカードを取得する
@@ -24,7 +24,7 @@ class TimeCard < ApplicationRecord
 
   # 勤務状況を取得する
   def working_status
-    case [!!in_time, !!out_time]
+    case [!!in_at, !!out_at]
     when [false, false]
       :not_arrived # 未出社
     when [true, false]
@@ -58,10 +58,10 @@ class TimeCard < ApplicationRecord
     end
 
     # カスタムバリデーション（退社時間が出社時間より後か？）
-    def out_time_is_later_than_in_time
-      return if in_time.nil? || out_time.nil?
+    def out_at_is_later_than_in_at
+      return if in_at.nil? || out_at.nil?
 
-      if in_time > out_time
+      if in_at > out_at
         errors[:base] << '退社時間は、出社時間より後の時間である必要があります'
       end
     end

@@ -58,16 +58,16 @@ class TimeCardTest < ActiveSupport::TestCase
     assert_not time_card.valid?
   end
 
-  test 'in_time should be present if out_time is present' do
-    @time_card.out_time = Time.now
+  test 'in_at should be present if out_at is present' do
+    @time_card.out_at = Time.now
     assert_not_valid
   end
 
-  test 'out_time should be later than in_time' do
-    in_time = Time.now
-    out_time = in_time - 10
-    @time_card.in_time = in_time
-    @time_card.out_time = out_time
+  test 'out_at should be later than in_at' do
+    in_at = Time.now
+    out_at = in_at - 10
+    @time_card.in_at = in_at
+    @time_card.out_at = out_at
     assert_not_valid
   end
 end

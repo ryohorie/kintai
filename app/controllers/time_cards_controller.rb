@@ -32,9 +32,9 @@ class TimeCardsController < ApplicationController
     # Ajaxでshowアクションが呼ばれた場合のハンドラ
     def ajax_show_action
       if params[:in]
-        @time_card.in_time = Time.now
+        @time_card.in_at = Time.now
       elsif params[:out]
-        @time_card.out_time = Time.now
+        @time_card.out_at = Time.now
       end
 
       if @time_card.save

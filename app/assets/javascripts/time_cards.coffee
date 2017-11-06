@@ -14,10 +14,10 @@ $ ->
     time_card = response.time_card
 
     if time_card
-      if time_card.in_time && !time_card.out_time
+      if time_card.in_at && !time_card.out_at
         in_enable = false
         out_enable = true
-      else if time_card.out_time
+      else if time_card.out_at
         in_enable = false
         out_enable = false
 
