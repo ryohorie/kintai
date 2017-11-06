@@ -1,9 +1,16 @@
 module TimeCardsHelper
-  def date_in_japanese(date = Date.today)
-    "#{date.year}年#{date.month}月#{date.day}日 #{day_of_the_week_in_japanese(date)}"
+  # 日付の日本語表現を取得する
+  def date_in_japanese(date = Date.today, format = :full)
+    case format
+    when :full
+      "#{date.year}年#{date.month}月#{date.day}日 #{day_of_the_week_in_japanese(date)}"
+    when :month_day
+      "#{date.month}月#{date.day}日"
+    end
   end
 
-  def day_of_the_week_in_japanese(date, short = false)
+  # 曜日の日本語表現を取得する
+  def day_of_the_week_in_japanese(date, format = :full)
     result =
       case date.wday
       when 0
@@ -22,9 +29,10 @@ module TimeCardsHelper
         '土曜日'
       end
 
-    short ? result[0] : result
+    format == :short ? result[0] : result
   end
 
+  # 勤務状況を取得する
   def working_status(time_card)
     case time_card.working_status
     when :not_arrived
@@ -34,5 +42,19 @@ module TimeCardsHelper
     when :left
       '退社済'
     end  
+  end
+
+  # 指定した年月の1日から月末までの日付とインデックスを引数としてブロックを実行する
+  def each_date_in_month(year, month)
+    date = Date.new(year, month, 1)
+
+    while date.month == month do
+      yield date, date.day - 1
+      date = date.next_day
+    end
+  end
+
+  def time_string(time)
+    time ? time.strftime('%H:%M') : ''
   end
 end

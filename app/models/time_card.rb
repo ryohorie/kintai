@@ -26,16 +26,22 @@ class TimeCard < ApplicationRecord
   def working_status
     case [!!in_time, !!out_time]
     when [false, false]
-      :not_arrived
+      :not_arrived # 未出社
     when [true, false]
-      :working
+      :working # 勤務中
     when [true, true]
-      :left
+      :left # 退社済
     end
+  end
+
+  # タイムカードの日付を返す
+  def date
+    Date.new(year, month, day)
   end
 
   private
 
+    # カスタムバリデーション（正しい日付か？）
     def valid_date
       if !positive_integer?(year) ||
         !positive_integer?(month) ||
@@ -46,10 +52,12 @@ class TimeCard < ApplicationRecord
       end
     end
 
+    # 正の整数か？
     def positive_integer?(value)
       !value.nil? && value.integer? && value > 0
     end
 
+    # カスタムバリデーション（退社時間が出社時間より後か？）
     def out_time_is_later_than_in_time
       return if in_time.nil? || out_time.nil?
 
