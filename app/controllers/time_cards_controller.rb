@@ -10,7 +10,6 @@ class TimeCardsController < ApplicationController
 
   def show
     @time_card = TimeCard.today(current_user)
-    puts '★★★★★★★★★★★★★time_cards#show'
 
     if request.xhr?
       ajax_show_action
