@@ -6,7 +6,8 @@
 
 ## デモURL
 
-以下のURLでデモ版の動作を確認できます。
+以下のURLでデモ版の動作を確認できます。  
+https://hidden-shore-25981.herokuapp.com/
 
 ## バージョン
 
