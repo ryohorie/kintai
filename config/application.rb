@@ -17,6 +17,5 @@ module Kintai
     config.action_view.automatically_disable_submit_tag = false
 
     config.time_zone = 'Tokyo'
-    config.assets.initialize_on_precompile = false
   end
 end
