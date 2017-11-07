@@ -2,6 +2,7 @@
   "name": "kintai",
   "private": true,
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "jquery": "^1.9.1"
   }
 }
