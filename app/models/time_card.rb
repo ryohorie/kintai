@@ -39,8 +39,8 @@ class TimeCard < ApplicationRecord
     Date.new(year, month, day)
   end
 
-  # 勤務時間（秒）を返す
-  def work_hours
+  # 勤務時間を返す（単位は秒）
+  def work_hours_in_seconds
     if in_at && out_at
       out_at - in_at
     else

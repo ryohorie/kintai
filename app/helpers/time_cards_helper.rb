@@ -55,12 +55,12 @@ module TimeCardsHelper
   end
 
   # 00:00 形式の時間を返す
-  def time_string(time)
+  def time_str(time)
     time ? time.strftime('%H:%M') : ''
   end
 
   # 00:00 形式の勤務時間を返す
-  def work_hours(second)
+  def time_diff_str(second)
     hours, rest = second.divmod(60 * 60)
     minutes, rest = rest.divmod(60)
 
