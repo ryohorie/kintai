@@ -1,24 +1,38 @@
-# README
+# 簡易勤怠管理システム（Ruby on Rails学習用）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
 
-Things you may want to cover:
+本プロジェクトは、Ruby on Railsを学習するために作成中の簡易勤怠管理システムです。
 
-* Ruby version
+## デモURL
 
-* System dependencies
+以下のURLでデモ版の動作を確認できます。
 
-* Configuration
+## バージョン
 
-* Database creation
+* Ruby 2.4.2
+* Rails 5.1.4
 
-* Database initialization
+## 開発環境の構築
 
-* How to run the test suite
+1. このリポジトリをフォークする
 
-* Services (job queues, cache servers, search engines, etc.)
+1. 依存Gemをインストールする
+```
+bundle install --without production
+```
 
-* Deployment instructions
+## テスト実行
 
-* ...
+手動で実行する場合
+
+```
+rails t
+```
+
+ファイル更新時に自動で実行する場合
+
+```
+bundle exec guard
+```
+
