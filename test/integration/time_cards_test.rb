@@ -6,6 +6,7 @@ class TestCardsTest < ActionDispatch::IntegrationTest
   end
 
   test 'in and out' do
+    # TODO: postがうまくtime_card#createに飛ばない
     skip
     assert_difference 'TimeCard.count', 0 do
       post timecard_path, xhr: true, params: { in: '出勤' }
