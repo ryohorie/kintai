@@ -7,14 +7,13 @@ class TestCardsTest < ActionDispatch::IntegrationTest
 
   test 'in and out' do
     skip
-    # TODO: xhr:trueでpostしてもコントローラーのアクションで、request.xhr?が真にならない
     assert_difference 'TimeCard.count', 0 do
-      post timecard_path, xhr: true, params: { name: 'in' }
+      post timecard_path, xhr: true, params: { in: '出勤' }
     end
 
     log_in_as(@user)
     assert_difference 'TimeCard.count', 1 do
-      post timecard_path, xhr: true, params: { name: 'in' }
+      post timecard_path, xhr: true, params: { out: '退社' }
     end
   end
 end

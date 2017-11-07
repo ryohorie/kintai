@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get '/timecard', to: 'time_cards#show'
-  post '/timecard', to: 'time_cards#show'
+  post '/timecard', to: 'time_cards#create'
   get '/monthly', to: 'time_cards#index'
 
   resources :users

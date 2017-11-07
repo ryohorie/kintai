@@ -10,9 +10,21 @@ class TimeCardsController < ApplicationController
 
   def show
     @time_card = TimeCard.today(current_user)
+  end
 
-    if request.xhr?
-      ajax_show_action
+  def create
+    @time_card = TimeCard.today(current_user)
+    
+    if params[:in]
+      @time_card.in_at = Time.now
+    elsif params[:out]
+      @time_card.out_at = Time.now
+    end
+
+    if @time_card.save
+      render json: { status: 'success', time_card: @time_card, working_status: @time_card.working_status }
+    else
+      render json: { status: 'error' }
     end
   end
 
@@ -27,20 +39,5 @@ class TimeCardsController < ApplicationController
         results[card.day - 1] = card
       end
       results
-    end
-
-    # Ajaxでshowアクションが呼ばれた場合のハンドラ
-    def ajax_show_action
-      if params[:in]
-        @time_card.in_at = Time.now
-      elsif params[:out]
-        @time_card.out_at = Time.now
-      end
-
-      if @time_card.save
-        render json: { status: 'success', time_card: @time_card, working_status: @time_card.working_status }
-      else
-        render json: { status: 'error' }
-      end
     end
 end
