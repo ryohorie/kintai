@@ -36,6 +36,8 @@ gem 'bootstrap-sass'
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
@@ -57,8 +59,6 @@ end
 
 group :test do
   gem 'rails-controller-testing'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'minitest-reporters'
   gem 'guard'
   gem 'guard-minitest'
