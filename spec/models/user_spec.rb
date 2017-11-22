@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) {
+  let(:user) do
     User.new(name: '山田太郎', email: 'yamada_taro@example.com',
               password: 'password', password_confirmation: 'password')
-  }
+  end
 
   describe '#valid?' do
 
@@ -77,6 +77,7 @@ RSpec.describe User, type: :model do
   end
 
   describe '#save' do
+    
     context 'upper-case letters in email address' do
       let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
 
