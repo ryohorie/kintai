@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'email address is aleady taken' do
+    context 'email is aleady taken' do
       subject(:duplicate_user) { create(:user).dup }
       it { expect(duplicate_user).not_to be_valid }
     end
@@ -75,6 +75,34 @@ RSpec.describe User, type: :model do
       it 'downcase before save' do
         user = create(:user, email: mixed_case_email)
         expect(user.reload.email).to eq mixed_case_email.downcase
+      end
+    end
+  end
+
+  describe '#save!' do
+
+    context 'validation is skipped' do
+      
+      context 'name is nil' do
+        subject(:user) { build(:user, name: nil) }
+        it { expect { user.save!(validate: false) }.to raise_error(ActiveRecord::NotNullViolation) }
+      end
+
+      context 'email is nil' do
+        subject(:user) { build(:user, email: nil) }
+        before { User.skip_callback(:save, :before, :downcase_email) }
+        after { User.set_callback(:save, :before, :downcase_email) }
+        it { expect { user.save!(validate: false) }.to raise_error(ActiveRecord::NotNullViolation) }
+      end
+
+      context 'password_digest is nil' do
+        subject(:user) { build(:user, password_digest: nil) }
+        it { expect { user.save!(validate: false) }.to raise_error(ActiveRecord::NotNullViolation) }
+      end
+
+      context 'email is aleady taken' do
+        subject(:duplicate_user) { create(:user).dup }
+        it { expect { duplicate_user.save!(validate: false) }.to raise_error(ActiveRecord::RecordNotUnique) }
       end
     end
   end
