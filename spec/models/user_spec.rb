@@ -2,30 +2,32 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  subject(:user) { build(:user) }
+  
   describe '#valid?' do
 
     context 'given valid parameters' do
       it { expect(build(:user)).to be_valid }
     end
   
-    context 'name is emtpy' do
-      it { expect(build(:user_with_empty_name)).not_to be_valid }
+    context 'name is nil' do
+      it { expect(user).to be_invalid_on(:name).with(nil) }
     end
 
     context 'name is blank' do
-      it { expect(build(:user_with_blank_name)).not_to be_valid }
+      it { expect(user).to be_invalid_on(:name).with('     ') }
     end
 
     context 'name is too long' do
-      it { expect(build(:user_with_too_long_name)).not_to be_valid }
+      it { expect(user).to be_invalid_on(:name).with('a' * 51) }
     end
   
-    context 'email is empty' do
-      it { expect(build(:user_with_empty_email)).not_to be_valid }
+    context 'email is nil' do
+      it { expect(user).to be_invalid_on(:email).with(nil) }
     end
 
     context 'email is too long' do
-      it { expect(build(:user_with_too_long_email)).not_to be_valid }
+      it { expect(user).to be_invalid_on(:email).with('a' * 244 + '@example.com') }      
     end
 
     context 'email is valid address' do
@@ -34,9 +36,10 @@ RSpec.describe User, type: :model do
           first.last@foo.jp alice+bob@baz.cn]
       }
 
-      it do
+      it 'is valid' do
         valid_addresses.each do |valid_address|
-          expect(build(:user, email: valid_address)).to be_valid
+          user = build(:user, email: valid_address)
+          expect(user).to be_valid
         end
       end
     end
@@ -47,20 +50,20 @@ RSpec.describe User, type: :model do
           foo@bar_baz.com foo@bar+baz.com]
       }
 
-      it do
+      it 'is invalid' do
         invalid_addresses.each do |invalid_address|
-          expect(build(:user, email: invalid_address)).not_to be_valid
+          expect(user).to be_invalid_on(:email).with(invalid_address)
         end
       end
     end
 
     context 'email address is aleady taken' do
-      let (:duplicate_user) { create(:user).dup }
+      subject(:duplicate_user) { create(:user).dup }
       it { expect(duplicate_user).not_to be_valid }
     end
 
-    context 'password is empty' do
-      it { expect(build(:user_with_empty_password)).not_to be_valid }
+    context 'password is nil' do
+      it { expect(user).to be_invalid_on(:password).with(nil) }
     end
   end
 

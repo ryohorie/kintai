@@ -1,11 +1,7 @@
 FactoryBot.define do
-  sequence :user_name do |n|
-    "user_#{n}"
-  end
-
   factory :user do
-    name { generate :user_name }
-    email { "#{name}@example.com" }
+    name 'user'
+    email 'user@example.com'
     password { User.digest('password') }
 
     factory :user_with_empty_name do

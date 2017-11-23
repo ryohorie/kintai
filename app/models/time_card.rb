@@ -1,10 +1,10 @@
 class TimeCard < ApplicationRecord
   belongs_to :user
 
-  validates :year, presence: true
-  validates :month, presence: true
-  validates :day, presence: true
-  validate :valid_date
+  validates :year, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :month, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :day, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validate :valid_date # このバリデーションは year, month, day のバリーデーションの下に定義しないと有効でない
   validates :in_at, presence: true, if: lambda { |m| !m.out_at.nil? }
   validate :out_at_is_later_than_in_at
 
@@ -52,18 +52,11 @@ class TimeCard < ApplicationRecord
 
     # カスタムバリデーション（正しい日付か？）
     def valid_date
-      if !positive_integer?(year) ||
-        !positive_integer?(month) ||
-        !positive_integer?(day) ||
-        !Date.valid_date?(year, month, day)
-
+      return if errors[:year].any? || errors[:month].any? || errors[:day].any?
+      
+      if !Date.valid_date?(year, month, day)
         errors[:base] << '不正な日付です'
       end
-    end
-
-    # 正の整数か？
-    def positive_integer?(value)
-      !value.nil? && value.integer? && value > 0
     end
 
     # カスタムバリデーション（退社時間が出社時間より後か？）
