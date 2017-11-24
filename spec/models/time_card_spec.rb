@@ -39,6 +39,7 @@ RSpec.describe TimeCard, type: :model do
 
     context 'combination of year, month, date is an invalid date' do
       subject(:time_card) { build(:time_card, year: 2017, month: 2, day: 29) }
+
       it 'is invalid' do
         expect(time_card).not_to be_valid
         expect(time_card.errors[:base].size).to be >= 1
@@ -55,6 +56,33 @@ RSpec.describe TimeCard, type: :model do
         expect(time_card).not_to be_valid
         expect(time_card.errors[:base].size).to be >= 1
       end
+    end
+  end
+
+  describe '#save!' do
+    
+    context 'year is nil' do
+      subject(:time_card) { build(:time_card, year: nil) }
+      it { expect { time_card.save!(validate: false) }.to raise_error(ActiveRecord::NotNullViolation) }
+    end
+
+    context 'month is nil' do
+      subject(:time_card) { build(:time_card, month: nil) }
+      it { expect { time_card.save!(validate: false) }.to raise_error(ActiveRecord::NotNullViolation) }
+    end
+
+    context 'day is nil' do
+      subject(:time_card) { build(:time_card, day: nil) }
+      it { expect { time_card.save!(validate: false) }.to raise_error(ActiveRecord::NotNullViolation) }
+    end
+
+    context 'TimeCard of the day aleady created' do
+      subject(:time_card) do
+        time_card = create(:time_card, year: 2017, month: 11, day: 4)
+        time_card.dup
+      end
+
+      it { expect { time_card.save!(validate: false) }.to raise_error(ActiveRecord::RecordNotUnique) }
     end
   end
 end
