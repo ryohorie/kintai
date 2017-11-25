@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     name 'user'
     email 'user@example.com'
-    password { User.digest('password') }
+    password 'password'
 
     factory :user_with_empty_name do
       name nil
