@@ -12,6 +12,9 @@ RSpec.feature "UserLogins", type: :feature do
       fill_in 'パスワード', with: 'password'
       click_button 'ログイン'
       expect(page).to have_current_path root_path
+
+      click_on 'ログアウト'
+      expect(page).to have_current_path login_path
     end
   end
 end
