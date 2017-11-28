@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   post '/timecard', to: 'time_cards#create'
   get '/monthly', to: 'time_cards#index'
 
-  resources :users
+  resources :users, only: [:new, :create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
