@@ -1,0 +1,16 @@
+%h1 ログイン
+.row
+  .col-md-6.col-md-offset-3
+    = form_for(:session, url: login_path) do |f|
+      .form-group
+        = f.label :email, 'メールアドレス'
+        = f.email_field :email, class: 'form-control'
+      .form-group
+        = f.label :password, 'パスワード'
+        = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.submit 'ログイン', class: 'btn btn-primary form-control'
+
+    %p
+      まだアカウントをお持ちでない場合
+      = link_to 'アカウント登録', signup_path

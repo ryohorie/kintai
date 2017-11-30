@@ -1,0 +1,24 @@
+%h1 #{@year}年#{@month}月の勤務表
+
+%table.table.table-bordered.table-condensed
+  %thead
+    %tr
+      %th 日付
+      %th 曜
+      %th 出社時間
+      %th 退社時間
+      %th 勤務時間
+
+- each_data_in_month(@year, @month) do |date, index|
+  %tbody
+    %tr
+      %td= date_in_japanese(date, :month_day)
+      %td= day_of_the_week_in_japanese(date, :short)
+    - if @time_cards[index]
+      %td= time_str(@time_cards[index].in_at)
+      %td= time_str(@time_cards[index].out_at)
+      %td= time_diff_str(@time_cards[index].work_hours_in_seconds)
+    - else
+      %td
+      %td
+      %td

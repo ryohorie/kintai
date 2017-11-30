@@ -1,0 +1,10 @@
+%header.navbar.navbar-default
+  .container
+    %nav
+      .navbar-header
+        = link_to "簡易勤怠管理システム", root_path, class: "navbar-brand"
+      %ul.nav.navbar-nav.navbar-right
+        - if logged_in?
+          %li= link_to "ログアウト", logout_path, method: :delete
+        - else
+          %li= link_to "ログイン", login_path
