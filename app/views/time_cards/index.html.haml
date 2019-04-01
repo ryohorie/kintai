@@ -9,7 +9,7 @@
       %th 退社時間
       %th 勤務時間
 
-- each_data_in_month(@year, @month) do |date, index|
+- each_date_in_month(@year, @month) do |date, index|
   %tbody
     %tr
       %td= date_in_japanese(date, :month_day)
