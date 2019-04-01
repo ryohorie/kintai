@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103062929) do
+ActiveRecord::Schema.define(version: 2017_11_03_062929) do
 
   create_table "time_cards", force: :cascade do |t|
     t.integer "year", limit: 2, null: false
